@@ -1,1 +1,9 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+ul {
+  list-style: none;
+}
+
+#book-shelf {
+  border: 5px solid #964b00;
+  border-radius: 5px;
+}
+/*# sourceMappingURL=style.css.map */

@@ -13,42 +13,124 @@
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <!-- Book shelf -->
-    <div class="accordion w-50 m-auto" id="bookshelf">
-        <!-- Book tab -->
-        <div class="accordion-item">
-          <!-- Book tab's header -->
-          <h2 class="accordion-header" id="book-title">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+      <!-- Buttons -->
+      <button class="btn btn-info" type="button" data-bs-toggle="offcanvas" data-bs-target="#new-book-form">
+          Add new book
+      </button>
+      <button id="remove-all-button" class="btn btn-info">Remove all books</button>
+      
+      <!-- New book offcanvas-form -->
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="new-book-form">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title">New book</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <form action="" class="needs-validation" id="book-form" novalidate>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="title-form" placeholder=" " required>
+                    <label for="title-form">Title</label>
+                    <div class="invalid-feedback">
+                        Title can't be empty.
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="isbn-form" placeholder=" " pattern="\d{13}" required>
+                    <label for="isbn-form">ISBN-13</label>
+                    <div class="invalid-feedback">
+                        ISBN-13 has to have exactly 13 digits.
+                    </div>
+                </div>
+                <div class="row g-2 mb-3">
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="first-name-form" placeholder=" " pattern="[a-zA-Z]+" required>
+                            <label for="first-name-form">Author First Name</label>
+                            <div class="invalid-feedback">
+                                The name has to contain word-characters only.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="last-name-form" placeholder=" " pattern="[a-zA-Z]+" required>
+                            <label for="last-name-form">Author Last Name</label>
+                            <div class="invalid-feedback">
+                                The name has to contain word-characters only.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="language-form" placeholder=" " pattern="[a-zA-Z]+" required>
+                    <label for="language-form">Language</label>
+                    <div class="invalid-feedback">
+                        The language has to contain word-characters only.
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="pages-form" placeholder=" " pattern="\d+" required>
+                    <label for="pages-form">Pages</label>
+                    <div class="invalid-feedback">
+                        Pages has to be a number.
+                    </div>
+                </div>
+                <select class="form-select mb-3" id="read-form">
+                    <option value="true">Read</option>
+                    <option value="false">Not yet</option>
+                </select>
+                <div class="mb-3">
+                    <label for="summary-form" class="form-label">Summary</label>
+                    <textarea class="form-control" id="summary-form" rows="3" required></textarea>
+                    <div class="invalid-feedback">
+                        The summary can't be empty.
+                    </div>
+                </div>
+                <button type="submit" id="add-book-button" class="btn btn-info">Add book</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Book-shelf accordion -->
+    <div class="accordion accordion-flush w-50 m-auto" id="book-shelf">
+        <div class="accordion-item" id="book-prototype" style="display: none;">
+          <h2 class="accordion-header" id="book-prototype-heading">
+            <button class="accordion-button book-title" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#collapse-0" 
+                    aria-expanded="false" 
+                    aria-controls="collapse-0"
+            >
               Book Title
             </button>
           </h2>
-          <!-- Book tab's body -->
-          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="book-title" data-bs-parent="#bookshelf">
+          <div id="collapse-0" class="accordion-collapse collapse" aria-labelledby="book-prototype-header">
             <div class="accordion-body">
-                <!-- Book card -->
                 <div class="card text-center bg-light">
-                    <!-- Book card's body  -->
                     <div class="card-body">
                         <h1 class="card-title">Book Title</h1>
-                        <h6 class="card-subtitle text-muted">ISBN: 1234567890123</h2>
-                        
-                        <!-- Book's info -->
-                        <div class="container text-center my-3">
-                            <strong>Author:</strong>
-                            <span>String</span>
-                            <br>
-                            <strong>Language:</strong>
-                            <span>String</span>
-                            <br>
-                            <strong>Pages:</strong>
-                            <span>Number</span>
-                            <strong></strong>
-                            <br>
-                            <strong>Summary:</strong>
-                            <span>String</span>
-                        </div>
-                        <a href="#" class="btn btn-info">Remove book</a>
+                        <h6 class="card-subtitle text-muted">
+                            <strong>ISBN:</strong> 
+                            <span class="isbn-field">1234567890123</span>
+                        </h6>                        
+                        <ul class="text-start my-3">
+                            <li><strong>Author: </strong><span class="author-field"> String</span></li>
+                            <li><strong>Language: </strong><span class="language-field"> String</span></li>
+                            <li><strong>Pages: </strong><span class="pages-field"> Number</span></li>
+                            <li>
+                                <strong>Read: </strong>
+                                <select class="form-select read-field mb-3 w-25 d-inline">
+                                    <option value="true">Read</option>
+                                    <option value="false">Not yet</option>
+                                </select>
+                            </li>
+                            <li>
+                                <strong>Summary:</strong>
+                                <p class="summary-field"> String</p>
+                            </li>
+                        </ul>
+                        <button class="remove-book-button btn btn-info">Remove book</button>
                     </div>
                   </div>
             </div>
