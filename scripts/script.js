@@ -5,7 +5,7 @@ const elAddButton = document.getElementById('add-book-button');
 const elRemoveAllButton = document.getElementById('remove-all-button');
 
 // Form elements
-const elBookForm = document.getElementById('book-form')
+const elFormBook = document.getElementById('book-form')
 const elFormTitle = document.getElementById('title-form');
 const elFormISBN = document.getElementById('isbn-form');
 const elFormFirstName = document.getElementById('first-name-form');
@@ -15,21 +15,23 @@ const elFormPages = document.getElementById('pages-form');
 const elFormRead = document.getElementById('read-form');
 const elFormSummary = document.getElementById('summary-form');
 
-let books = initLibrary();
+let books = initLibrary(); // Get the data
+
 
 // Add the event listeners
-elBookForm.addEventListener('submit', (event) => {
+elFormBook.addEventListener('submit', (event) => {
     event.preventDefault();
-    elBookForm.classList.add('was-validated');
+    elFormBook.classList.add('was-validated');
 
-    if (!elBookForm.checkValidity()) {
+    if (!elFormBook.checkValidity()) {
         event.stopPropagation();
     } else {
         addBook();
-        elBookForm.classList.remove('was-validated');
+        elFormBook.classList.remove('was-validated');
     }
 });
 elRemoveAllButton.addEventListener('click', removeBooks);
+
 
 function Book(title, isbn, author, language, pages, read, summary) {
     this.title = title;
@@ -40,6 +42,7 @@ function Book(title, isbn, author, language, pages, read, summary) {
     this.read = read;
     this.summary = summary;
 }
+
 
 function initLibrary() {
     let books = {};
@@ -84,7 +87,7 @@ function storageAvailable(type) {
     }
 }
 
-// Adds a book to the storage and 
+// Adds a book to the storage
 function addBook() {
     // Read the input
     let title = elFormTitle.value;
@@ -129,14 +132,14 @@ function removeBook(bookTitle) {
     }
 }
 
-// Remove all books
+// Removes all books from the storage
 function removeBooks() {
     for (let book in books) {
         removeBook(book);
     }
 }
 
-// Display the book on the page
+// Displays the book on the page
 function displayBook(book) {
     // Make a copy of the template element
     let elNewBook = elBookTemplate.cloneNode(true);

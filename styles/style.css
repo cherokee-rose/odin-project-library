@@ -2,8 +2,13 @@ ul {
   list-style: none;
 }
 
-#book-shelf {
-  border: 5px solid #964b00;
-  border-radius: 5px;
+body {
+  background: url("../images/background-image.jpg") no-repeat;
+  background-size: cover;
+}
+
+.buttons {
+  margin-top: 3%;
+  margin-left: 3%;
 }
 /*# sourceMappingURL=style.css.map */
