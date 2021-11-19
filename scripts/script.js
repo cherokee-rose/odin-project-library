@@ -32,17 +32,17 @@ elFormBook.addEventListener('submit', (event) => {
 });
 elRemoveAllButton.addEventListener('click', removeBooks);
 
-
-function Book(title, isbn, author, language, pages, read, summary) {
-    this.title = title;
-    this.isbn = isbn;
-    this.author = author;
-    this.language = language;
-    this.pages = pages;
-    this.read = read;
-    this.summary = summary;
+class Book {
+    constructor(title, isbn, author, language, pages, read, summary) {
+        this.title = title;
+        this.isbn = isbn;
+        this.author = author;
+        this.language = language;
+        this.pages = pages;
+        this.read = read;
+        this.summary = summary;
+    }
 }
-
 
 function initLibrary() {
     let books = {};
